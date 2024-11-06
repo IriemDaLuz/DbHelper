@@ -134,6 +134,7 @@ fun MainActivity(modifier: Modifier) {
                     val db = DBHelper(context, null)
 
                     val cursor = db.getName()
+                    val listItems = mutableListOf<Triple<Int, String, String>>()
 
                     cursor!!.moveToFirst()
                     lName += "\n" + cursor.getString(cursor.getColumnIndex(DBHelper.NAME_COl))
