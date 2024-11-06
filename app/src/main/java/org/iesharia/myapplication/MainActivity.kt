@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -68,6 +69,8 @@ fun MainActivity(modifier: Modifier) {
     var items by remember { mutableStateOf(emptyList<Triple<Int, String, String>>()) }
     var nameValue by remember { mutableStateOf("") }
     var ageValue by remember { mutableStateOf("") }
+    var selectedName by remember { mutableStateOf("") }
+    var selectedAge by remember { mutableStateOf("") }
 
     Column (
         verticalArrangement = Arrangement.Center,
@@ -167,10 +170,19 @@ fun MainActivity(modifier: Modifier) {
 
         LazyColumn(modifier = Modifier.padding(vertical = 8.dp)) {
             items(items) { item ->
-                Row {
-                    Text(text = item.first.toString())
-                    Text(text = item.second)
-                    Text(text = item.third)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            selectedName = item.second
+                            selectedAge = item.third
+                        }
+                        .padding(8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(text = item.first.toString(), fontSize = 16.sp)
+                    Text(text = item.second, fontSize = 16.sp)
+                    Text(text = item.third, fontSize = 16.sp)
                 }
             }
         }
