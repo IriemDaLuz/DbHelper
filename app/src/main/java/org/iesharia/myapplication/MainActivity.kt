@@ -1,5 +1,6 @@
 package org.iesharia.myapplication
 
+import android.annotation.SuppressLint
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.widget.Toast
@@ -57,6 +58,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@SuppressLint("Range")
 @Composable
 fun MainActivity(modifier: Modifier) {
     val context = LocalContext.current
