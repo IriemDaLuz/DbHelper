@@ -193,7 +193,6 @@ fun MainActivity(modifier: Modifier) {
                 }
             }
         }
-
         // Mostrar selección
         if (selectedName.isNotEmpty() && selectedAge.isNotEmpty()) {
             Text(
