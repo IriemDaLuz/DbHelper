@@ -186,6 +186,14 @@ fun MainActivity(modifier: Modifier) {
                 }
             }
         }
+        if (selectedName.isNotEmpty() && selectedAge.isNotEmpty()) {
+        Text(
+            text = "Seleccionado: $selectedName, $selectedAge",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
 
     }
 }
