@@ -135,26 +135,17 @@ fun MainActivity(modifier: Modifier) {
 
                     val cursor = db.getName()
                     val listItems = mutableListOf<Triple<Int, String, String>>()
-
                     cursor?.let {
                         if (cursor.moveToFirst()) {
                             do {
-
+                                val id = cursor.getInt(cursor.getColumnIndex(DBHelper.ID_COL))
+                                val name = cursor.getString(cursor.getColumnIndex(DBHelper.NAME_COl))
+                                val age = cursor.getString(cursor.getColumnIndex(DBHelper.AGE_COL))
+                                listItems.add(Triple(id, name, age))
                             } while (cursor.moveToNext())
                         }
                         cursor.close()
                     }
-                    cursor!!.moveToFirst()
-                    val id = cursor.getInt(cursor.getColumnIndex(DBHelper.ID_COL))
-                    lName += "\n" + cursor.getString(cursor.getColumnIndex(DBHelper.NAME_COl))
-                    lAge += "\n" + cursor.getString(cursor.getColumnIndex(DBHelper.AGE_COL))
-
-                    while(cursor.moveToNext()){
-                        lName += "\n" + cursor.getString(cursor.getColumnIndex(DBHelper.NAME_COl))
-                        lAge += "\n" + cursor.getString(cursor.getColumnIndex(DBHelper.AGE_COL))
-                    }
-
-                    cursor.close()
                 }
             ) {
                 Text(text = "Mostrar")
