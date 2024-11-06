@@ -66,13 +66,13 @@ fun MainActivity(modifier: Modifier) {
     val context = LocalContext.current
     val db = DBHelper(context)
 
-    var items by remember { mutableStateOf(emptyList<Triple<Int, String, String>>()) }
     var nameValue by remember { mutableStateOf("") }
     var ageValue by remember { mutableStateOf("") }
     var selectedName by remember { mutableStateOf("") }
     var selectedAge by remember { mutableStateOf("") }
+    var items by remember { mutableStateOf(emptyList<Triple<Int, String, String>>()) }
 
-    Column (
+    Column(
         verticalArrangement = Arrangement.Center,
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -85,47 +85,42 @@ fun MainActivity(modifier: Modifier) {
         Text(
             text = "Muuuuuy simple\nNombre/Edad",
             fontSize = 10.sp
-
         )
-        //Nombre
+
+        // Campo para Nombre
         OutlinedTextField(
             value = nameValue,
-            onValueChange = {
-                nameValue = it
-            },
+            onValueChange = { nameValue = it },
             modifier = Modifier,
             textStyle = TextStyle(color = Color.DarkGray),
             label = { Text(text = "Nombre") },
             singleLine = true,
             shape = RoundedCornerShape(10.dp)
         )
-        //Edad
+
+        // Campo para Edad
         OutlinedTextField(
             value = ageValue,
-            onValueChange = {
-                ageValue = it
-            },
+            onValueChange = { ageValue = it },
             modifier = Modifier,
             textStyle = TextStyle(color = Color.DarkGray),
             label = { Text(text = "Edad") },
             singleLine = true,
             shape = RoundedCornerShape(10.dp)
         )
-        var bModifier:Modifier = Modifier.padding(20.dp)
+
+        val bModifier = Modifier.padding(20.dp)
+
         Row {
             Button(
                 modifier = bModifier,
                 onClick = {
-                    val name = nameValue
-                    val age = ageValue
-
-                    db.addName(name, age)
-
+                    db.addName(nameValue, ageValue)
                     Toast.makeText(
                         context,
-                        name + " adjuntado a la base de datos",
-                        Toast.LENGTH_LONG)
-                        .show()
+                        "$nameValue adjuntado a la base de datos",
+                        Toast.LENGTH_LONG
+                    ).show()
 
                     nameValue = ""
                     ageValue = ""
@@ -133,30 +128,31 @@ fun MainActivity(modifier: Modifier) {
             ) {
                 Text(text = "Añadir")
             }
+
             Button(
                 modifier = bModifier,
                 onClick = {
-                    val db = DBHelper(context, null)
-
                     val cursor = db.getName()
-                    val listItems = mutableListOf<Triple<Int, String, String>>()
+                    val tempItems = mutableListOf<Triple<Int, String, String>>()
                     cursor?.let {
                         if (cursor.moveToFirst()) {
                             do {
                                 val id = cursor.getInt(cursor.getColumnIndex(DBHelper.ID_COL))
                                 val name = cursor.getString(cursor.getColumnIndex(DBHelper.NAME_COl))
                                 val age = cursor.getString(cursor.getColumnIndex(DBHelper.AGE_COL))
-                                listItems.add(Triple(id, name, age))
+                                tempItems.add(Triple(id, name, age))
                             } while (cursor.moveToNext())
                         }
                         cursor.close()
                     }
-                    items = listItems
+                    items = tempItems
                 }
             ) {
                 Text(text = "Mostrar")
             }
         }
+
+        // Encabezado de la lista
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -168,6 +164,7 @@ fun MainActivity(modifier: Modifier) {
             Text(text = "Edad", fontWeight = FontWeight.Bold, fontSize = 18.sp)
         }
 
+        // Lista de nombres y edades con selección
         LazyColumn(modifier = Modifier.padding(vertical = 8.dp)) {
             items(items) { item ->
                 Row(
@@ -180,20 +177,21 @@ fun MainActivity(modifier: Modifier) {
                         .padding(8.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = item.first.toString(), fontSize = 16.sp)
-                    Text(text = item.second, fontSize = 16.sp)
-                    Text(text = item.third, fontSize = 16.sp)
+                    Text(text = item.first.toString(), fontSize = 16.sp) // ID
+                    Text(text = item.second, fontSize = 16.sp)           // Nombre
+                    Text(text = item.third, fontSize = 16.sp)            // Edad
                 }
             }
         }
-        if (selectedName.isNotEmpty() && selectedAge.isNotEmpty()) {
-        Text(
-            text = "Seleccionado: $selectedName, $selectedAge",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(16.dp)
-        )
-    }
 
+        // Mostrar selección
+        if (selectedName.isNotEmpty() && selectedAge.isNotEmpty()) {
+            Text(
+                text = "Seleccionado: $selectedName, $selectedAge",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
     }
 }
