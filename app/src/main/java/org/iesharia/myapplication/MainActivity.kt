@@ -3,6 +3,7 @@ package org.iesharia.myapplication
 import android.annotation.SuppressLint
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -133,6 +134,7 @@ fun MainActivity(modifier: Modifier) {
             Button(
                 modifier = bModifier,
                 onClick = {
+                    Log.d("MainActivity", "Mostrando registros desde la base de datos")
                     val cursor = db.getName()
                     val tempItems = mutableListOf<Triple<Int, String, String>>()
                     cursor?.let {
@@ -181,6 +183,7 @@ fun MainActivity(modifier: Modifier) {
                     // Botón de eliminar
                     Button(
                         onClick = {
+                            Log.d("MainActivity", "Eliminando registro")
                             db.onDelete(item.first)
                             Toast.makeText(context, "Registro eliminado", Toast.LENGTH_SHORT).show()
                         }
