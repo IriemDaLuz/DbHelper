@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -65,8 +66,8 @@ fun MainActivity(modifier: Modifier) {
     val db = DBHelper(context)
 
     var items by remember { mutableStateOf(emptyList<Triple<Int, String, String>>()) }
-    var lName:String by remember { mutableStateOf("Nombre") }
-    var lAge:String by remember { mutableStateOf("Edad") }
+    var nameValue by remember { mutableStateOf("") }
+    var ageValue by remember { mutableStateOf("") }
 
     Column (
         verticalArrangement = Arrangement.Center,
@@ -165,16 +166,7 @@ fun MainActivity(modifier: Modifier) {
             Text(text = "Nombre", fontWeight = FontWeight.Bold, fontSize = 18.sp)
             Text(text = "Edad", fontWeight = FontWeight.Bold, fontSize = 18.sp)
         }
-        Row {
-            Text(
-                modifier = bModifier,
-                text = lName
-            )
-            Text(
-                modifier = bModifier,
-                text = lAge
-            )
-        }
+
 
     }
 }
