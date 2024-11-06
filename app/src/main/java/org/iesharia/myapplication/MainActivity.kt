@@ -155,6 +155,9 @@ fun MainActivity(modifier: Modifier) {
         }
         Row(
             modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(text = "ID", fontWeight = FontWeight.Bold, fontSize = 18.sp)
             Text(text = "Nombre", fontWeight = FontWeight.Bold, fontSize = 18.sp)
