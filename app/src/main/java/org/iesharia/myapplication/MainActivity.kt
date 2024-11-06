@@ -85,7 +85,6 @@ fun MainActivity(modifier: Modifier) {
 
         )
         //Nombre
-        var nameValue by remember { mutableStateOf("") }
         OutlinedTextField(
             value = nameValue,
             onValueChange = {
@@ -98,7 +97,6 @@ fun MainActivity(modifier: Modifier) {
             shape = RoundedCornerShape(10.dp)
         )
         //Edad
-        var ageValue by remember { mutableStateOf("") }
         OutlinedTextField(
             value = ageValue,
             onValueChange = {
@@ -167,6 +165,15 @@ fun MainActivity(modifier: Modifier) {
             Text(text = "Edad", fontWeight = FontWeight.Bold, fontSize = 18.sp)
         }
 
+        LazyColumn(modifier = Modifier.padding(vertical = 8.dp)) {
+            items(items) { item ->
+                Row {
+                    Text(text = item.first.toString())
+                    Text(text = item.second)
+                    Text(text = item.third)
+                }
+            }
+        }
 
     }
 }
