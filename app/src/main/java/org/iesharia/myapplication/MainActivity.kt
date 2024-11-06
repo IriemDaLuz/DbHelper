@@ -153,6 +153,13 @@ fun MainActivity(modifier: Modifier) {
                 Text(text = "Mostrar")
             }
         }
+        Row(
+            modifier = Modifier
+        ) {
+            Text(text = "ID", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text(text = "Nombre", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text(text = "Edad", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+        }
         Row {
             Text(
                 modifier = bModifier,
