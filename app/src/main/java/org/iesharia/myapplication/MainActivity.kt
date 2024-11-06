@@ -171,16 +171,22 @@ fun MainActivity(modifier: Modifier) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable {
-                            selectedName = item.second
-                            selectedAge = item.third
-                        }
                         .padding(8.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = item.first.toString(), fontSize = 16.sp) // ID
                     Text(text = item.second, fontSize = 16.sp)           // Nombre
                     Text(text = item.third, fontSize = 16.sp)            // Edad
+
+                    // Botón de eliminar
+                    Button(
+                        onClick = {
+                            db.onDelete(item.first)
+                            Toast.makeText(context, "Registro eliminado", Toast.LENGTH_SHORT).show()
+                        }
+                    ) {
+                        Text(text = "Eliminar")
+                    }
                 }
             }
         }
