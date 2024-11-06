@@ -137,6 +137,7 @@ fun MainActivity(modifier: Modifier) {
                     val listItems = mutableListOf<Triple<Int, String, String>>()
 
                     cursor!!.moveToFirst()
+                    val id = cursor.getInt(cursor.getColumnIndex(DBHelper.ID_COL)) /
                     lName += "\n" + cursor.getString(cursor.getColumnIndex(DBHelper.NAME_COl))
                     lAge += "\n" + cursor.getString(cursor.getColumnIndex(DBHelper.AGE_COL))
 
