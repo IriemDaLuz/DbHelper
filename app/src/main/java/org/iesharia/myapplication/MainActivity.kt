@@ -62,6 +62,7 @@ fun MainActivity(modifier: Modifier) {
     val context = LocalContext.current
     val db = DBHelper(context)
 
+    var items by remember { mutableStateOf(emptyList<Triple<Int, String, String>>()) }
     var lName:String by remember { mutableStateOf("Nombre") }
     var lAge:String by remember { mutableStateOf("Edad") }
 
@@ -146,6 +147,7 @@ fun MainActivity(modifier: Modifier) {
                         }
                         cursor.close()
                     }
+                    items = listItems
                 }
             ) {
                 Text(text = "Mostrar")
