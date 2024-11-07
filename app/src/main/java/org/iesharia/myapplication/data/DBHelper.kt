@@ -1,4 +1,4 @@
-package org.iesharia.myapplication
+package org.iesharia.myapplication.data
 
 import android.content.ContentValues
 import android.content.Context
