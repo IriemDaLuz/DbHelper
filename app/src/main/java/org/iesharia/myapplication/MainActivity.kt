@@ -190,6 +190,16 @@ fun MainActivity(modifier: Modifier) {
                     ) {
                         Text(text = "Eliminar")
                     }
+                    // Botón de actualizar
+                    Button(
+                        onClick = {
+                            Log.d("MainActivity", "Actualizando registro")
+                            db.onUpdate(item.first)
+                            Toast.makeText(context, "Registro actualizado", Toast.LENGTH_SHORT).show()
+                        }
+                    ) {
+                        Text(text = "Actualizar")
+                    }
                 }
             }
         }
