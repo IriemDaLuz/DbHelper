@@ -25,9 +25,13 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory? = null) 
         onCreate(db)
     }
 
-    fun onUpdate(id: Int) {
+    fun onUpdate(id: Int, name: String, age: String) {
         val db = this.writableDatabase
-
+        val values = ContentValues()
+        values.put(NAME_COl, name)
+        values.put(AGE_COL, age)
+        db.update(TABLE_NAME, values, "$ID_COL = ?", arrayOf(id.toString()))
+        db.close()
     }
 
     fun onDelete(id: Int) {
